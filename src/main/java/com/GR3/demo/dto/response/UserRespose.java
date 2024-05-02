@@ -1,4 +1,4 @@
-package com.GR3.demo.dto.request;
+package com.GR3.demo.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -10,11 +10,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserUpdateRequest {
+public class UserRespose {
+    private String id;
+    String username;
     String password;
     String firstName;
     String lastName;
     LocalDate dob;
-
-
 }

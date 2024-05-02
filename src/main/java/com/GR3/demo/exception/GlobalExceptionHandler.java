@@ -1,12 +1,11 @@
 package com.GR3.demo.exception;
 
-import com.GR3.demo.dto.request.ApiRespose;
+import com.GR3.demo.dto.ApiRespose;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
@@ -25,9 +24,21 @@ public class GlobalExceptionHandler {
         apiRespose.setMessage(exception.getMessage());
         return ResponseEntity.badRequest().body(apiRespose);
     }
-//    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-//    ResponseEntity<String> handlingValidation(MethodArgumentNotValidException exception){
-//        return ResponseEntity.badRequest().body(exception.getFieldError().getDefaultMessage());
-//
-//    }
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    ResponseEntity<ApiRespose> handlingValidation(MethodArgumentNotValidException exception){
+        String enumKey = exception.getFieldError().getDefaultMessage();
+        ErrorCode errorCode = ErrorCode.INVALID_KEY;
+        try {
+            errorCode = ErrorCode.valueOf(enumKey);
+        }
+        catch (IllegalArgumentException e){
+
+        }
+
+        ApiRespose apiRespose = new ApiRespose();
+        apiRespose.setCode(errorCode.getCode());
+        apiRespose.setMessage(errorCode.getMessage());
+        return ResponseEntity.badRequest().body(apiRespose);
+
+    }
 }

@@ -1,6 +1,6 @@
 package com.GR3.demo.controller;
 
-import com.GR3.demo.dto.request.ApiRespose;
+import com.GR3.demo.dto.ApiRespose;
 import com.GR3.demo.dto.request.UserCreationRequest;
 import com.GR3.demo.dto.request.UserUpdateRequest;
 import com.GR3.demo.entity.User;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -20,11 +21,12 @@ public class UserController {
     @Autowired
     private TestService testService;
 
-    @PostMapping("/users")
+    @PostMapping
     ApiRespose<User> createUser(@RequestBody @Valid UserCreationRequest request){
         ApiRespose<User> apiRespose = new ApiRespose<>();
 
         apiRespose.setResult(userService.createUser(request));
+
         return  apiRespose;
     }
 
