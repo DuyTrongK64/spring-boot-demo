@@ -30,8 +30,12 @@ public class UserController {
         return  apiRespose;
     }
 
-    @GetMapping("/users")
-    List<User> getUsers(){return userService.getUsers();};
+    @GetMapping
+    ApiRespose<List<User>> getUsers(){
+        ApiRespose<List<User>> apiRespose = new ApiRespose<>();
+
+        
+    };
 
     @GetMapping("/{userId}")
     User getUser(@PathVariable("userId") String userId){
