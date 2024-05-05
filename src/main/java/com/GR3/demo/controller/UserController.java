@@ -34,23 +34,31 @@ public class UserController {
     ApiRespose<List<User>> getUsers(){
         ApiRespose<List<User>> apiRespose = new ApiRespose<>();
 
-        
+        apiRespose.setResult(userService.getUsers());
+
+        return apiRespose;
     };
 
     @GetMapping("/{userId}")
-    User getUser(@PathVariable("userId") String userId){
-        return userService.getUser(userId);
+    ApiRespose<User> getUser(@PathVariable("userId") String userId){
+        ApiRespose<User> apiRespose = new ApiRespose<>();
+        apiRespose.setResult(userService.getUser(userId));
+        return apiRespose;
     }
 
     @PutMapping("/{userId}")
-    User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request){
-        return userService.updateUser(userId, request);
+    ApiRespose<User> updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request){
+        ApiRespose<User> apiRespose = new ApiRespose<>();
+        apiRespose.setResult(userService.updateUser(userId, request));
+        return apiRespose;
     }
 
     @DeleteMapping("/{userId}")
-    String deleteUser(@PathVariable String userId){
+    ApiRespose deleteUser(@PathVariable String userId){
+        ApiRespose apiRespose = new ApiRespose();
         userService.deleteUser(userId);
-        return "User has been deleted";
+        apiRespose.setMessage("User deleted!");
+        return apiRespose;
     }
 
     @GetMapping("/test")

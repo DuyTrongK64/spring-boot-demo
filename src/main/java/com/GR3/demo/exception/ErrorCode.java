@@ -7,6 +7,7 @@ import java.net.http.HttpRequest;
 public enum ErrorCode {
     USER_EXISTED(HttpStatus.CONFLICT.value(), "User existed!"),
     USER_NOT_EXISTED(HttpStatus.NOT_FOUND.value(), "Username or password is not existed!"),
+    NOT_AUTHENTICATED(HttpStatus.NOT_FOUND.value(), "Username or password is invalid!"),
     UNCATEGORIZED_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Uncategorized error!"),
     INVALID_KEY(HttpStatus.BAD_REQUEST.value(), "Invalid message key"),
     PASSWORD_INVALID(HttpStatus.UNAUTHORIZED.value(), "Password must have least 8 character"),
