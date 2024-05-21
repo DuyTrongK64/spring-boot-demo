@@ -8,6 +8,7 @@ import com.GR3.demo.service.TestService;
 import com.GR3.demo.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class UserController {
 
     @Autowired
     private TestService testService;
+
 
     @PostMapping
     ApiRespose<User> createUser(@RequestBody @Valid UserCreationRequest request){
